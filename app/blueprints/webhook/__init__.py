@@ -92,7 +92,9 @@ def setup(chat_id, message):
                         db.session.commit()
                         return send_message(chat_id, new_message)
                     else:
-                        send_message(chat_id, "No bank was found, please try again or select another bank.")
+                        send_message(chat_id, "No bank was found, please try again with /setup command.")
+                        user.state = None
+                        db.session.commit()
                 else:
                     print(response.text)
 
