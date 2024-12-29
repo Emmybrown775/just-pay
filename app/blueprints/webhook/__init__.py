@@ -20,7 +20,7 @@ PAYSTACK_HEADER = {
 def set_webhook():
     response =  requests.post(
         f"{TOKEN_URL}/setWebhook",
-        json={"url": f"https://acb4-102-90-101-44.ngrok-free.app/tel-bp/{TOKEN}"}
+        json={"url": f"https://just-pay.onrender.com/tel-bp/{TOKEN}"}
     )
 
     print(response.json())
@@ -112,7 +112,8 @@ def setup(chat_id, message):
                 )
 
                 if response.status_code == 200:
-                    new_message = f"Please confirm with y or n your account name is: {response.json()['data']["account_name"]}"
+                    account_name = response.json()['data']['account_name']
+                    new_message = f"Please confirm with y or n your account name is: {account_name}"
                     user.temp_details["bank_code"] = message
                     user.temp_details["account_name"] = response.json()['data']["account_name"]
 
